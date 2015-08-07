@@ -15,10 +15,10 @@
  * - None, yet.
  */
 
-#include "aiko_engine/include/aiko_engine.h"
-#include "aiko_engine/include/network.h"
+#include "aiko_engine.h"
+#include "aiko_network.h"
 
-#include "../include/lifx_message.h"
+#include "lifx_message.h"
 
 lifx_message_t ICACHE_FLASH_ATTR
 *lifx_create_message(
