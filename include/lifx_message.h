@@ -14,7 +14,7 @@
 
 #pragma once
 
-#include "../vendor/aiko_engine/include/compatibility.h"
+#include "aiko_engine/include/compatibility.h"
 
 #define LIFX_PROTOCOL_NUMBER   1024
 #define LIFX_RETRIES              2

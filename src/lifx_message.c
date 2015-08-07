@@ -15,8 +15,8 @@
  * - None, yet.
  */
 
-#include "../vendor/aiko_engine/include/aiko_engine.h"
-#include "../vendor/aiko_engine/include/network.h"
+#include "aiko_engine/include/aiko_engine.h"
+#include "aiko_engine/include/network.h"
 
 #include "../include/lifx_message.h"
 
