@@ -50,7 +50,7 @@ lifx_message_handler(
   uint8_t  *message,
   uint16_t  length) {
 
-  uint8_t handled = 0;
+  uint8_t handled = AIKO_NOT_HANDLED;
 
   if (length >= sizeof(lifx_message_t)) {
     lifx_message_t *lifx_message = (lifx_message_t *) message;
