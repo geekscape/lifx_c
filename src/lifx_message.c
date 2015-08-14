@@ -8,7 +8,7 @@
  *
  * Description
  * ~~~~~~~~~~~
- * LIFX LAN protocol implementation
+ * LIFX LAN message implementation
  *
  * To Do
  * ~~~~~
@@ -18,9 +18,9 @@
 #include "aiko_engine.h"
 #include "aiko_network.h"
 
-#include "lifx_message.h"
+#include "lifx.h"
 
-lifx_message_t ICACHE_FLASH_ATTR
+lifx_message_t ATTRIBUTES
 *lifx_create_message(
   uint16_t type,
   uint8_t  size) {
@@ -45,7 +45,7 @@ lifx_message_t ICACHE_FLASH_ATTR
   return(message);
 }
 
-uint8_t ICACHE_FLASH_ATTR
+uint8_t ATTRIBUTES
 lifx_message_handler(
   uint8_t  *message,
   uint16_t  length) {
@@ -55,13 +55,15 @@ lifx_message_handler(
   if (length >= sizeof(lifx_message_t)) {
     lifx_message_t *lifx_message = (lifx_message_t *) message;
 
+printf("lifx_message_handler(): type %d\n", lifx_message->type);
+
 // TODO: Per LIFX message type handler, using function table
   }
 
   return(handled);
 }
 
-void ICACHE_FLASH_ATTR
+void ATTRIBUTES
 lifx_set_target(
   lifx_message_t *message,
   lifx_target_t  *target) {
@@ -83,7 +85,17 @@ lifx_set_target(
   message->tagged = (memcmp(target, "000000000000", 12) == 0)  ?  1  :  0;
 }
 
-lifx_message_light_set_color_t ICACHE_FLASH_ATTR
+lifx_message_t ATTRIBUTES
+*lifx_create_device_get_service(void) {
+
+  lifx_message_t *message = lifx_create_message(
+    LIFX_DEVICE_GET_SERVICE, sizeof(lifx_message_t)
+  );
+
+  return(message);
+}
+
+lifx_message_light_set_color_t ATTRIBUTES
 *lifx_create_light_set_color(
   lifx_color_t *color,
   uint32_t      duration) {
@@ -100,7 +112,7 @@ lifx_message_light_set_color_t ICACHE_FLASH_ATTR
   return(message);
 }
 
-lifx_message_light_set_power_t ICACHE_FLASH_ATTR
+lifx_message_light_set_power_t ATTRIBUTES
 *lifx_create_light_set_power(
   uint16_t level,
   uint32_t duration) {
@@ -116,7 +128,7 @@ lifx_message_light_set_power_t ICACHE_FLASH_ATTR
   return(message);
 }
 
-void ICACHE_FLASH_ATTR
+void ATTRIBUTES
 lifx_message_send(
   int             fd,
   lifx_targets_t *targets,
