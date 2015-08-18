@@ -1,3 +1,0 @@
-[submodule "vendor/aiko_engine"]
-	path = vendor/aiko_engine
-	url = https://github.com/geekscape/aiko_engine.git
