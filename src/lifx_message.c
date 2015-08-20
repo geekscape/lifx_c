@@ -140,7 +140,9 @@ lifx_message_send(
   for (retry = 0;  retry < retries;  retry ++) {
     for (target = 0;  target < targets->count;  target ++) {
       lifx_set_target(message, & targets->targets[target]);
-      udp_send_broadcast(fd, LIFX_UDP_PORT, (uint8_t *) message, message->size);
+      aiko_udp_send_broadcast(
+        fd, LIFX_UDP_PORT, (uint8_t *) message, message->size
+      );
     }
 
     if (retries > 1) usleep(10000);  // microseconds
