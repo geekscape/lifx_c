@@ -5,6 +5,7 @@ OBJECTS =  examples/unix/lifx_dashboard.o
 OBJECTS += src/lifx_message.o
 OBJECTS += src/lifx_protocol.o
 OBJECTS += vendor/aiko_engine/src/common/aiko_engine.o
+OBJECTS += vendor/aiko_engine/src/unix/engine.o
 OBJECTS += vendor/aiko_engine/src/unix/network.o
 OBJECTS += vendor/aiko_engine/src/unix/serial.o
 OBJECTS += vendor/aiko_engine/src/unix/timer.o
