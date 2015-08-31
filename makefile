@@ -14,9 +14,11 @@ all:	version lifx_dashboard
 
 GIT_VERSION := $(shell git describe --abbrev=8 --dirty --always --tags)
 
-version:
-	@echo '#define LIFX_VERSION  "$(GIT_VERSION)"' >include/lifx_version.h
+version:	version_lifx
 	@(cd vendor/aiko_engine; $(MAKE) version)
+
+version_lifx:
+	@echo '#define LIFX_VERSION  "$(GIT_VERSION)"' >include/lifx_version.h
 
 lifx_dashboard:	$(OBJECTS)
 	gcc $^ -o $@
