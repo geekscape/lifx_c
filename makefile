@@ -10,7 +10,7 @@ OBJECTS += vendor/aiko_engine/src/unix/network.o
 OBJECTS += vendor/aiko_engine/src/unix/serial.o
 OBJECTS += vendor/aiko_engine/src/unix/timer.o
 
-all:	version lifx_dashboard
+all:	lifx_dashboard
 
 GIT_VERSION := $(shell git describe --abbrev=8 --dirty --always --tags)
 
@@ -20,8 +20,8 @@ version:	version_lifx
 version_lifx:
 	@echo '#define LIFX_VERSION  "$(GIT_VERSION)"' >include/lifx_version.h
 
-lifx_dashboard:	$(OBJECTS)
-	gcc $^ -o $@
+lifx_dashboard:	version $(OBJECTS)
+	gcc $(filter %.o, $^) -o $@
 
 $(OBJECTS):	\
 	include/lifx.h                                  \

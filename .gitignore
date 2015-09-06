@@ -24,6 +24,7 @@ include/lifx_version.h
 *.dylib
 
 # Executables
+lifx_dashboard
 *.exe
 *.out
 *.app
