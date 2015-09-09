@@ -38,7 +38,7 @@ uint8_t ATTRIBUTES
 lifx_initialize(
   lifx_discovery_handler_t *lifx_discovery_handler) {
 
-  lifx_socket_fd = aiko_udp_create_socket(1, LIFX_UDP_PORT);
+  lifx_socket_fd = aiko_create_socket_udp(TRUE, LIFX_UDP_PORT);
 
   aiko_add_handler(
     aiko_create_source(AIKO_SOURCE_SOCKET_UDP4, lifx_socket_fd),
