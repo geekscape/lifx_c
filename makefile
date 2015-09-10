@@ -1,14 +1,27 @@
+CFLAGS += -DMMEM_CONF_SIZE=256
 CFLAGS += -Iinclude
 CFLAGS += -Ivendor/aiko_engine/include
+CFLAGS += -Ivendor/aiko_engine/examples/common/aiko_server
 
 OBJECTS =  examples/unix/lifx_dashboard.o
+OBJECTS += src/lifx_aiko_extend.o
 OBJECTS += src/lifx_message.o
 OBJECTS += src/lifx_protocol.o
 OBJECTS += vendor/aiko_engine/src/common/aiko_engine.o
 OBJECTS += vendor/aiko_engine/src/unix/engine.o
 OBJECTS += vendor/aiko_engine/src/unix/network.o
 OBJECTS += vendor/aiko_engine/src/unix/serial.o
+OBJECTS += vendor/aiko_engine/src/unix/store.o
 OBJECTS += vendor/aiko_engine/src/unix/timer.o
+OBJECTS += vendor/aiko_engine/src/unix/wifi.o
+OBJECTS += vendor/aiko_engine/src/common/lisp/expression.o
+OBJECTS += vendor/aiko_engine/src/common/lisp/interface.o
+OBJECTS += vendor/aiko_engine/src/common/lisp/parser.o
+OBJECTS += vendor/aiko_engine/src/common/lisp/primitives.o
+OBJECTS += vendor/aiko_engine/src/common/lisp/utility.o
+OBJECTS += vendor/aiko_engine/src/common/memory/list.o
+OBJECTS += vendor/aiko_engine/src/common/memory/mmem.o
+OBJECTS += vendor/aiko_engine/examples/common/aiko_server/lisp_extend.o
 
 all:	lifx_dashboard
 
@@ -24,12 +37,18 @@ lifx_dashboard:	version $(OBJECTS)
 	gcc $(filter %.o, $^) -o $@
 
 $(OBJECTS):	\
-	include/lifx.h                                  \
-	include/lifx_message.h                          \
-	vendor/aiko_engine/include/aiko_engine.h        \
-	vendor/aiko_engine/include/aiko_compatibility.h \
-	vendor/aiko_engine/include/aiko_network.h       \
-	vendor/aiko_engine/include/aiko_serial.h
+	include/lifx.h                                                \
+	include/lifx_message.h                                        \
+	vendor/aiko_engine/include/aiko_engine.h                      \
+	vendor/aiko_engine/include/aiko_compatibility.h               \
+	vendor/aiko_engine/include/aiko_network.h                     \
+	vendor/aiko_engine/include/aiko_serial.h                      \
+	vendor/aiko_engine/include/aiko_store.h                       \
+        vendor/aiko_engine/include/aiko_wifi.h                        \
+        vendor/aiko_engine/include/lisp.h                             \
+        vendor/aiko_engine/include/memory/list.h                      \
+        vendor/aiko_engine/include/memory/mmem.h                      \
+	vendor/aiko_engine/examples/common/aiko_server/lisp_extend.h
 
 clean:
 	-rm -f $(OBJECTS) include/lifx_version.h

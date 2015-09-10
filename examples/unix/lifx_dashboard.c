@@ -21,8 +21,12 @@
 
 #include "lifx.h"
 
+/* ------------------------------------------------------------------------- */
+
 void lifx_discovery_handler(void) {
 }
+
+/* ------------------------------------------------------------------------- */
 
 int main(
   int   argc,
@@ -30,9 +34,13 @@ int main(
 
   printf("[%s %s]\n", argv[0], LIFX_VERSION);
 
+  lifx_aiko_extend(LISP_DEBUG);
+
   lifx_initialize(lifx_discovery_handler);
 
   aiko_loop(AIKO_LOOP_FOREVER);
 
   return(0);
 }
+
+/* ------------------------------------------------------------------------- */
