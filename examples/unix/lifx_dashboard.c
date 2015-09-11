@@ -34,7 +34,7 @@ int main(
 
   printf("[%s %s]\n", argv[0], LIFX_VERSION);
 
-  lifx_aiko_extend(LISP_DEBUG);
+  lifx_extend(LISP_DEBUG, & lifx_targets_all);
 
   lifx_initialize(lifx_discovery_handler);
 

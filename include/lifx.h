@@ -43,6 +43,8 @@ typedef struct {
 
 static lifx_targets_t lifx_targets_all = { 1, {"000000000000"} };
 
+void lifx_extend(uint8_t debug_flag, lifx_targets_t *lifx_targets);
+
 uint8_t lifx_initialize(lifx_discovery_handler_t *handler);
 
 uint8_t lifx_message_handler(uint8_t *message, uint16_t length);

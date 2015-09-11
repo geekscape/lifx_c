@@ -4,7 +4,7 @@ CFLAGS += -Ivendor/aiko_engine/include
 CFLAGS += -Ivendor/aiko_engine/examples/common/aiko_server
 
 OBJECTS =  examples/unix/lifx_dashboard.o
-OBJECTS += src/lifx_aiko_extend.o
+OBJECTS += src/lifx_extend.o
 OBJECTS += src/lifx_message.o
 OBJECTS += src/lifx_protocol.o
 OBJECTS += vendor/aiko_engine/src/common/aiko_engine.o
