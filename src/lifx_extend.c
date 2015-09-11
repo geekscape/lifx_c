@@ -92,7 +92,7 @@ tExpression ATTRIBUTES
 
 /* ------------------------------------------------------------------------- */
 
-void lifx_extend(
+lifx_store_t *lifx_extend(
   uint8_t         debug_flag,
   lifx_targets_t *lifx_targets) {
 
@@ -118,9 +118,7 @@ void lifx_extend(
 
   if (lispError) {
     printf("Error: Aiko Lisp initialization: %d\n", lispError);
-#ifndef __ets__
-    exit(-1);
-#endif
+    return(NULL);
   }
 
   lisp_extend(lisp_environment, (aiko_store_t *) lifx_store);
@@ -144,6 +142,8 @@ void lifx_extend(
     aiko_create_socket_source(AIKO_SOURCE_SOCKET_UDP4, 0, AIKO_PORT),
     lisp_message_handler
   );
+
+  return(lifx_store);
 }
 
 /* ------------------------------------------------------------------------- */

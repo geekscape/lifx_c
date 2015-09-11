@@ -34,7 +34,7 @@ int main(
 
   printf("[%s %s]\n", argv[0], LIFX_VERSION);
 
-  lifx_extend(LISP_DEBUG, & lifx_targets_all);
+  if (lifx_extend(LISP_DEBUG, & lifx_targets_all) == NULL) exit(-1);
 
   lifx_initialize(lifx_discovery_handler);
 

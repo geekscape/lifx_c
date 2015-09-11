@@ -43,7 +43,7 @@ typedef struct {
 
 static lifx_targets_t lifx_targets_all = { 1, {"000000000000"} };
 
-void lifx_extend(uint8_t debug_flag, lifx_targets_t *lifx_targets);
+lifx_store_t *lifx_extend(uint8_t debug_flag, lifx_targets_t *lifx_targets);
 
 uint8_t lifx_initialize(lifx_discovery_handler_t *handler);
 
@@ -58,4 +58,5 @@ lifx_message_light_set_power_t *lifx_create_light_set_power(
   uint16_t level, uint32_t duration);
 
 void lifx_message_send(
-  int fd, lifx_targets_t *targets, lifx_message_t *message, uint8_t retries);
+  int fd, lifx_targets_t *targets, lifx_message_t *message, uint8_t retries
+);
