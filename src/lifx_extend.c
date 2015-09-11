@@ -50,7 +50,8 @@ tExpression ATTRIBUTES
     int index;
     for (index = 0;  index < lifx_store->lifx_targets.count; index ++) {
       tExpression *target = lispCreateAtom(
-        lifx_store->lifx_targets.targets[index], sizeof(lifx_target_t)
+        (const char *) lifx_store->lifx_targets.targets[index],
+        sizeof(lifx_target_t)
       );
 
       if (result == nil) {
