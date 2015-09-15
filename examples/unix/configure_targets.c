@@ -117,7 +117,8 @@ int main(
 
   char *message_end = stpcpy(message, "(7:targets(");
 
-  for (int index = 0;  index < lifx_targets->count;  index ++) {
+  int index;
+  for (index = 0;  index < lifx_targets->count;  index ++) {
     message_end = stpcpy(message_end, "12:");
 
     message_end = stpncpy(
