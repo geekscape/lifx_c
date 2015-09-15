@@ -127,7 +127,7 @@ int main(
   }
 
   stpcpy(message_end, "))\n");
-printf("message: %s\n", message);  exit(-1);
+
   int socket_fd = aiko_create_socket_udp(0, AIKO_PORT);
 
   aiko_socket_send_broadcast(                           // aiko_socket_send() ?
