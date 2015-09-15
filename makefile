@@ -31,6 +31,9 @@ all:	configure_targets lifx_dashboard
 GIT_VERSION := $(shell git describe --abbrev=8 --dirty --always --tags)
 
 version:	version_lifx
+ifeq ("$(wildcard vendor/aiko_engine/makefile)","")
+	@(git submodule update --init)
+endif
 	@(cd vendor/aiko_engine; $(MAKE) version)
 
 version_lifx:
