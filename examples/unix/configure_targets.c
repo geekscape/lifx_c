@@ -51,10 +51,10 @@ lifx_targets_t *initialize(
 
   lifx_targets_t *lifx_targets = & lifx_targets_all;
 
-  while ((option = getopt(argc, argv, "-h")) != -1) {
+  while ((option = getopt(argc, argv, "h")) != -1) {
     switch(option) {
       case 'h':
-      default:
+      case '?':
         show_help(argv[0]);
         exit(-1);
     }
@@ -127,7 +127,7 @@ int main(
   }
 
   stpcpy(message_end, "))\n");
-
+printf("message: %s\n", message);  exit(-1);
   int socket_fd = aiko_create_socket_udp(0, AIKO_PORT);
 
   aiko_socket_send_broadcast(                           // aiko_socket_send() ?
