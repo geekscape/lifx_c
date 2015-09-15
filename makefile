@@ -3,7 +3,6 @@ CFLAGS += -Iinclude
 CFLAGS += -Ivendor/aiko_engine/include
 CFLAGS += -Ivendor/aiko_engine/examples/common/aiko_server
 
-OBJECTS =  examples/unix/lifx_dashboard.o
 OBJECTS += src/lifx_extend.o
 OBJECTS += src/lifx_message.o
 OBJECTS += src/lifx_protocol.o
@@ -23,7 +22,11 @@ OBJECTS += vendor/aiko_engine/src/common/memory/list.o
 OBJECTS += vendor/aiko_engine/src/common/memory/mmem.o
 OBJECTS += vendor/aiko_engine/examples/common/aiko_server/lisp_extend.o
 
-all:	lifx_dashboard
+LIFX_DASHBOARD_OBJECTS = examples/unix/lifx_dashboard.o
+
+CONFIGURE_TARGETS_OBJECTS = examples/unix/configure_targets.o
+
+all:	configure_targets lifx_dashboard
 
 GIT_VERSION := $(shell git describe --abbrev=8 --dirty --always --tags)
 
@@ -33,7 +36,10 @@ version:	version_lifx
 version_lifx:
 	@echo '#define LIFX_VERSION  "$(GIT_VERSION)"' >include/lifx_version.h
 
-lifx_dashboard:	version $(OBJECTS)
+configure_targets:	version $(CONFIGURE_TARGETS_OBJECTS) $(OBJECTS)
+	gcc $(filter %.o, $^) -o $@
+
+lifx_dashboard:	version $(LIFX_DASHBOARD_OBJECTS) $(OBJECTS)
 	gcc $(filter %.o, $^) -o $@
 
 $(OBJECTS):	\
@@ -51,10 +57,12 @@ $(OBJECTS):	\
 	vendor/aiko_engine/examples/common/aiko_server/lisp_extend.h
 
 clean:
+	-rm -f $(CONFIGURE_TARGETS_OBJECTS)
+	-rm -f $(LIFX_DASHBOARD_OBJECTS)
 	-rm -f $(OBJECTS) include/lifx_version.h
 
 clobber:	clean
-	-rm -f lifx_dashboard
+	-rm -f configure_targets lifx_dashboard
 
 help :
 	@echo ""
