@@ -41,7 +41,7 @@ lifx_initialize(
   lifx_socket_fd = aiko_create_socket_udp(TRUE, LIFX_UDP_PORT);
 
   aiko_add_handler(
-    aiko_create_source(AIKO_SOURCE_SOCKET_UDP4, lifx_socket_fd),
+    aiko_create_stream(AIKO_STREAM_SOCKET_UDP4, lifx_socket_fd),
     lifx_message_handler
   );
 

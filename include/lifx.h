@@ -48,7 +48,7 @@ lifx_store_t *lifx_extend(uint8_t debug_flag, lifx_targets_t *lifx_targets);
 uint8_t lifx_initialize(lifx_discovery_handler_t *handler);
 
 uint8_t lifx_message_handler(
-  void *aiko_source, uint8_t *message, uint16_t length
+  void *aiko_stream, uint8_t *message, uint16_t length
 );
 
 lifx_message_t *lifx_create_device_get_service(void);

@@ -133,14 +133,14 @@ lifx_store_t *lifx_extend(
 
 #ifdef __ets__
   aiko_add_handler(
-    aiko_create_serial_source(NULL, BAUD_NO_CHANGE, '\r'), lisp_message_handler
+    aiko_create_serial_stream(NULL, BAUD_NO_CHANGE, '\r'), lisp_message_handler
   );
 #else
-  aiko_add_handler(aiko_create_file_source(stdin), lisp_message_handler);
+  aiko_add_handler(aiko_create_file_stream(stdin), lisp_message_handler);
 #endif
 
   aiko_add_handler(
-    aiko_create_socket_source(AIKO_SOURCE_SOCKET_UDP4, 0, AIKO_PORT),
+    aiko_create_socket_stream(AIKO_STREAM_SOCKET_UDP4, 0, AIKO_PORT),
     lisp_message_handler
   );
 
