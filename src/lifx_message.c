@@ -47,6 +47,7 @@ lifx_message_t ATTRIBUTES
 
 uint8_t ATTRIBUTES
 lifx_message_handler(
+  void     *aiko_source,
   uint8_t  *message,
   uint16_t  length) {
 
