@@ -62,5 +62,8 @@ lifx_message_light_set_power_t *lifx_create_light_set_power(
 );
 
 void lifx_message_send(
-  int fd, lifx_targets_t *targets, lifx_message_t *message, uint8_t retries
+  aiko_stream_t  *aiko_stream,
+  lifx_targets_t *targets,
+  lifx_message_t *message,
+  uint8_t retries
 );

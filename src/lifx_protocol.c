@@ -20,7 +20,7 @@
 
 #include "lifx.h"
 
-static int lifx_socket_fd;
+static aiko_stream_t *lifx_stream;
 
 static lifx_discovery_handler_t *lifx_discovery_callback = NULL;
 
@@ -28,7 +28,7 @@ uint8_t lifx_discovery_timer_handler(
   void *timer_self) {
 
   lifx_message_t *message = lifx_create_device_get_service();
-  lifx_message_send(lifx_socket_fd, & lifx_targets_all, message, LIFX_RETRIES);
+  lifx_message_send(lifx_stream, & lifx_targets_all, message, LIFX_RETRIES);
   free(message);
 
   return(AIKO_HANDLED);
@@ -38,12 +38,11 @@ uint8_t ATTRIBUTES
 lifx_initialize(
   lifx_discovery_handler_t *lifx_discovery_handler) {
 
-  lifx_socket_fd = aiko_create_socket_udp(TRUE, LIFX_UDP_PORT);
-
-  aiko_add_handler(
-    aiko_create_stream(AIKO_STREAM_SOCKET_UDP4, lifx_socket_fd),
-    lifx_message_handler
+  lifx_stream = aiko_create_socket_stream(
+    AIKO_STREAM_SOCKET_UDP4, TRUE, 0, LIFX_UDP_PORT
   );
+
+  aiko_add_handler(lifx_stream, lifx_message_handler);
 
   if (lifx_discovery_handler != NULL) {
     lifx_discovery_callback = lifx_discovery_handler;

@@ -131,7 +131,7 @@ lifx_message_light_set_power_t ATTRIBUTES
 
 void ATTRIBUTES
 lifx_message_send(
-  int             fd,
+  aiko_stream_t  *aiko_stream,
   lifx_targets_t *targets,
   lifx_message_t *message,
   uint8_t         retries) {
@@ -142,7 +142,7 @@ lifx_message_send(
     for (target = 0;  target < targets->count;  target ++) {
       lifx_set_target(message, & targets->targets[target]);
       aiko_socket_send_broadcast(
-        fd, LIFX_UDP_PORT, (uint8_t *) message, message->size
+        aiko_stream, (uint8_t *) message, message->size
       );
     }
 

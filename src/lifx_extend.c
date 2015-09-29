@@ -74,7 +74,7 @@ tExpression ATTRIBUTES
 
       uint8_t target_string[sizeof(lifx_target_t) + 1];
       memset(& target_string, 0x00, sizeof(target_string));
-      lispToString(target, & target_string, sizeof(target_string));
+      lispExpressionToString(target, & target_string, sizeof(target_string));
 
       memcpy(
         & lifx_store->lifx_targets.targets[lifx_store->lifx_targets.count ++],
@@ -118,11 +118,16 @@ lifx_store_t *lifx_extend(
   tExpression *lisp_environment = lisp_initialize(debug_flag);
 
   if (lispError) {
-    printf("Error: Aiko Lisp initialization: %d\n", lispError);
+    printf("lisp_initialize(): %s\n", lispErrorMessage);
     return(NULL);
   }
 
   lisp_extend(lisp_environment, (aiko_store_t *) lifx_store);
+
+  if (lispError) {
+    printf("lisp_extend(): %s\n", lispErrorMessage);
+    return(NULL);
+  }
 
   lispAppend(
     lisp_environment, lispCreatePrimitive("targets",  primitiveTargets)
@@ -140,7 +145,7 @@ lifx_store_t *lifx_extend(
 #endif
 
   aiko_add_handler(
-    aiko_create_socket_stream(AIKO_STREAM_SOCKET_UDP4, 0, AIKO_PORT),
+    aiko_create_socket_stream(AIKO_STREAM_SOCKET_UDP4, TRUE, 0, AIKO_PORT),
     lisp_message_handler
   );
 

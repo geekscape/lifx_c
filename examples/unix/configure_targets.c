@@ -17,6 +17,7 @@
  * To Do
  * ~~~~~
  * - No command-line arguments, then display current target list from device.
+ *   ... or discover switches and targets and provide a means to select them.
  *
  * - https://en.wikipedia.org/wiki/Datagram_Transport_Layer_Security ?
  */
@@ -128,16 +129,18 @@ int main(
 
   stpcpy(message_end, "))\n");
 
-  int socket_fd = aiko_create_socket_udp(0, AIKO_PORT);
+  aiko_stream_t *aiko_stream = aiko_create_socket_stream(
+    AIKO_STREAM_SOCKET_UDP4, FALSE, 0, AIKO_PORT
+  );
 
   aiko_socket_send_broadcast(                           // aiko_socket_send() ?
-    socket_fd, AIKO_PORT, (uint8_t *) message, strlen(message)
+    aiko_stream, (uint8_t *) message, strlen(message)
   );
 
   strcpy(message, "(4:save)\n");
 
   aiko_socket_send_broadcast(                           // aiko_socket_send() ?
-    socket_fd, AIKO_PORT, (uint8_t *) message, strlen(message)
+    aiko_stream, (uint8_t *) message, strlen(message)
   );
 
   return(0);
