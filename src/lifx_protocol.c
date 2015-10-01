@@ -15,6 +15,10 @@
  * - None, yet.
  */
 
+#ifdef __ets__
+#include "user_interface.h"  // Define STATION_GOT_IP
+#endif
+
 #include "aiko_engine.h"
 #include "aiko_network.h"
 
@@ -27,9 +31,17 @@ static lifx_discovery_handler_t *lifx_discovery_callback = NULL;
 uint8_t lifx_discovery_timer_handler(
   void *timer_self) {
 
-  lifx_message_t *message = lifx_create_device_get_service();
-  lifx_message_send(lifx_stream, & lifx_targets_all, message, LIFX_RETRIES);
-  free(message);
+#ifdef __ets__
+  uint8_t connected = wifi_station_get_connect_status() == STATION_GOT_IP;
+#else
+  uint8_t connected = TRUE;
+#endif
+
+  if (connected) {
+    lifx_message_t *message = lifx_create_device_get_service();
+    lifx_message_send(lifx_stream, & lifx_targets_all, message, LIFX_RETRIES);
+    free(message);
+  }
 
   return(AIKO_HANDLED);
 }
