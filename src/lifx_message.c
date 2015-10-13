@@ -12,7 +12,8 @@
  *
  * To Do
  * ~~~~~
- * - None, yet.
+ * - Support setting "source" field for sending broadcast UDP message and then
+ *   receiving unicast UDP message on client port (doesn't have to be 56700).
  */
 
 #include "aiko_engine.h"
