@@ -20,6 +20,7 @@ OBJECTS += vendor/aiko_engine/src/common/lisp/primitives.o
 OBJECTS += vendor/aiko_engine/src/common/lisp/utility.o
 OBJECTS += vendor/aiko_engine/src/common/memory/list.o
 OBJECTS += vendor/aiko_engine/src/common/memory/mmem.o
+OBJECTS += vendor/aiko_engine/src/common/state/machine.o
 OBJECTS += vendor/aiko_engine/examples/common/aiko_server/lisp_extend.o
 
 LIFX_DASHBOARD_OBJECTS = examples/unix/lifx_dashboard.o
@@ -52,6 +53,7 @@ $(OBJECTS):	\
 	vendor/aiko_engine/include/aiko_compatibility.h               \
 	vendor/aiko_engine/include/aiko_network.h                     \
 	vendor/aiko_engine/include/aiko_serial.h                      \
+	vendor/aiko_engine/include/aiko_state.h                       \
 	vendor/aiko_engine/include/aiko_store.h                       \
         vendor/aiko_engine/include/aiko_wifi.h                        \
         vendor/aiko_engine/include/lisp.h                             \
