@@ -260,12 +260,14 @@ int main(
   switch (option) {
     case OPTION_ASSIGN_TARGETS:
       aiko_state_machine(
+        aiko_state_lisp_message_handler,
         states, states_count, aiko_stream, action_assign_device_targets
       );
       break;
 
     case OPTION_LIST_TARGETS:
       aiko_state_machine(
+        aiko_state_lisp_message_handler,
         states, states_count, aiko_stream, action_list_device_targets
       );
       break;
